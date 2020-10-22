@@ -36,10 +36,10 @@
                         <td><?= $d["email"] ?></td>
                         <td><?= $d["role"] ?></td>
                         <td>
-                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#karyawanDeleteModal{{ $i }}"> 
+                            <button class="btn btn-primary btn-sm"> 
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </button>
-                            <button class="btn btn-danger btn-sm">
+                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#karyawanDeleteModal{{ $i }}">
                                 <i class="fas fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>

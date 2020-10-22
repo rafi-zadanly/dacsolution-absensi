@@ -31,7 +31,10 @@ class Karyawan extends Controller {
     }
 
     public function destroy(){
-        
+        $id = $_POST["id_delete"];
+        $status_delete = $this->model('Karyawan_Model')->destroy($id);
+
+        header('Location: ' . BASEURL . '/karyawan');
     }
 }
 

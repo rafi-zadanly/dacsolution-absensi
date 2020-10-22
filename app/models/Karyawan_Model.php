@@ -35,16 +35,14 @@ class Karyawan_Model {
         return $this->db->execute() ? true : false;
     }
 
-    public function deleteData($id)
+    public function destroy($id)
     {
-        $query = "DELETE FROM mahasiswa WHERE id = :id";
+        $query = "DELETE FROM " . $this->table . " WHERE id = :id";
         
         $this->db->query($query);
         $this->db->bind('id', $id);
 
-        $this->db->execute();
-
-        return $this->db->rowCount();
+        return $this->db->execute() ? true : false;
     }
 
 
