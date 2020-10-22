@@ -33,16 +33,40 @@ class Karyawan_Model {
 
     public function store($data)
     {
-        $query = "INSERT INTO " . $this->table . " VALUES (NULL, :email, :name, :pin, :role)";
-        
+        $pin_used = false;
+        $email_used = false;
+
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE pin=:pin';
+
+        $this->db->query($query);
+        $this->db->bind('pin', md5($data['pin']));
+        $this->db->resultSet();
+        $pin_used = $this->db->rowCount() > 0 ? true : false;
+
+        $ret["pin_used"] = $pin_used;
+
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE email=:email';
+
         $this->db->query($query);
         $this->db->bind('email', $data['email']);
-        $this->db->bind('name', $data['name']);
-        $this->db->bind('pin', md5($data['pin']));
-        $this->db->bind('role', $data['role']);
-        $this->db->execute();
+        $this->db->resultSet();
+        $email_used = $this->db->rowCount() > 0 ? true : false;
 
-        return $this->db->rowCount();
+        $ret["email_used"] = $email_used;
+
+        if ($pin_used == false && $email_used == false) {
+            $query = "INSERT INTO " . $this->table . " VALUES (NULL, :email, :name, :pin, :role)";
+        
+            $this->db->query($query);
+            $this->db->bind('email', $data['email']);
+            $this->db->bind('name', $data['name']);
+            $this->db->bind('pin', md5($data['pin']));
+            $this->db->bind('role', $data['role']);
+            $this->db->execute();
+            $ret["row"] = $this->db->rowCount();
+        }
+
+        return $ret;
     }
 
     public function destroy($id)
