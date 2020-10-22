@@ -32,21 +32,37 @@ class Karyawan extends Controller {
 
         if (($name && $email && $pin && $role) != "") {
             $status_post = $this->model('Karyawan_Model')->store($req_data);
-            if ($status_post > 0) {
-                Flasher::setFlash("Berhasil menambahkan data karyawan.", "success");
+            
+            if ($status_post["pin_used"] == false && $status_post["email_used"] == false) {
+                if ($status_post["row"] > 0) {
+                    Flasher::setFlash("Berhasil menambahkan data karyawan.", "success");
+                }else{
+                    Flasher::setFlash("Gagal menambahkan data karyawan.", "danger");
+                }
             }else{
-                Flasher::setFlash("Gagal menambahkan data karyawan.", "danger");
+                $this->older_values_add($req_data);
+                if ($status_post["email_used"]) {
+                    Flasher::setFlash("Email tersebut sudah digunakan.", "danger");
+                }else if($status_post["pin_used"]){
+                    Flasher::setFlash("Pin tersebut sudah digunakan.", "danger");
+                }
             }
+            
         }else{
-            OlderValues::set("save_name", $name);
-            OlderValues::set("save_email", $email);
-            OlderValues::set("save_pin", $pin);
-            OlderValues::set("save_role", $role);
-            OlderValues::set("modal", "Add");
+            $this->older_values_add($req_data);
             Flasher::setFlash("Isikan form dengan benar.", "danger");
         }
         
         header('Location: ' . BASEURL . '/karyawan');
+    }
+
+    private function older_values_add($data)
+    {
+        OlderValues::set("save_name", $data["name"]);
+        OlderValues::set("save_email", $data["email"]);
+        OlderValues::set("save_pin", $data["pin"]);
+        OlderValues::set("save_role", $data["role"]);
+        OlderValues::set("modal", "Add");
     }
 
     public function destroy(){
