@@ -9,6 +9,15 @@ class Karyawan_Model {
         $this->db = new Database;
     }
 
+    public function auth($data)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE email=:email AND pin=:pin');
+        $this->db->bind('email', $data["email"]);
+        $this->db->bind('pin', md5($data["pin"]));
+
+        return $this->db->single();
+    }
+
     public function getAll()
     {
         $this->db->query('SELECT * FROM ' . $this->table);

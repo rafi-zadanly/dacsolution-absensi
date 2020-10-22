@@ -11,7 +11,8 @@ class Karyawan extends Controller {
         $this->view('templates/footer');
     }
 
-    public function store(){
+    public function store()
+    {
         $name = $_POST["save_name"];
         $email = $_POST["save_email"];
         $pin = $_POST["save_pin"];

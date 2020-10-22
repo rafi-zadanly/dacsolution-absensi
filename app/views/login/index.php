@@ -19,15 +19,17 @@
                 <div class="col-8 offset-2">
                     <div class="mt-5 p-3"></div>
                     <h1 class="mt-5 text-center">Login</h1>
-                    <div class="form-group mt-5">
-                        <label for="email">Email</label>
-                        <input type="text" class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="">
-                    </div>
-                    <div class="form-group mt-3">
-                        <label for="pin">Pin</label>
-                        <input type="password" class="form-control" name="pin" id="pin" aria-describedby="helpId" placeholder="" autocomplete="off">
-                    </div>
-                    <button class="btn btn-primary w-100 mt-3 rounded-pill">Sign In</button>
+                    <form action="<?= BASEURL; ?>/auth/login" method="post">
+                        <div class="form-group mt-5">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="pin">Pin</label>
+                            <input type="password" class="form-control" name="pin" id="pin" aria-describedby="helpId" placeholder="" autocomplete="off">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mt-3 rounded-pill">Sign In</button>
+                    </form>
                     <p class="text-center mt-4">
                         <small>Lupa pin? <a href="/forgot-pin">klik disini</a></small>
                     </p>
