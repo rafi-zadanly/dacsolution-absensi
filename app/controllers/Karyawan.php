@@ -5,8 +5,9 @@ class Karyawan extends Controller {
     {
         $data['page'] = 'Karyawan';
         $data['nested_page'] = '';
+        $data['karyawan'] = $this->model('Karyawan_Model')->getAll();
         $this->view('templates/header', $data);
-        $this->view('karyawan/index');
+        $this->view('karyawan/index', $data);
         $this->view('templates/footer');
     }
 
