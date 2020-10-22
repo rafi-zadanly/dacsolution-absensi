@@ -29,6 +29,11 @@ class Karyawan extends Controller {
         
         header('Location: ' . BASEURL . '/karyawan');
     }
+
+    public function destroy(){
+        
+    }
 }
 
+    
 ?>

@@ -28,15 +28,15 @@
                 <tbody>
                 <?php 
                     $i = 1;
-                    foreach ($data["karyawan"] as $d) : 
+                    foreach ($data["karyawan"] as $d) :                     
                 ?>
                     <tr>
-                        <td><?= $i++ ?></td>
+                        <td><?= $i ?></td>
                         <td><?= $d["full_name"] ?></td>
                         <td><?= $d["email"] ?></td>
                         <td><?= $d["role"] ?></td>
                         <td>
-                            <button class="btn btn-primary btn-sm">
+                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#karyawanDeleteModal{{ $i }}"> 
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </button>
                             <button class="btn btn-danger btn-sm">
@@ -44,7 +44,31 @@
                             </button>
                         </td>
                     </tr>
-                <?php endforeach; ?>
+
+                    <!-- Modal Hapus -->
+                    <div class="modal fade" id="karyawanDeleteModal<?= $i ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Hapus data karyawan "<?= $d["full_name"] ?>" ?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                    <form action="<?= BASEURL ?>/karyawan/destroy" method="post">
+                                        <input type="hidden" name="id_delete" value="<?= $d["id"] ?>">
+                                        <button type="submit" class="btn btn-outline-primary">Hapus</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                    $i++;
+                    endforeach; 
+                ?>
                 </tbody>
             </table>
         </div>
