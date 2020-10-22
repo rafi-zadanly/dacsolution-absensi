@@ -39,7 +39,7 @@
                             <button class="btn btn-primary btn-sm"> 
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </button>
-                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#karyawanDeleteModal{{ $i }}">
+                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#karyawanDeleteModal<?= $i ?>">
                                 <i class="fas fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
@@ -59,7 +59,7 @@
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                                     <form action="<?= BASEURL ?>/karyawan/destroy" method="post">
                                         <input type="hidden" name="id_delete" value="<?= $d["id"] ?>">
-                                        <button type="submit" class="btn btn-outline-primary">Hapus</button>
+                                        <button type="submit" class="btn btn-primary">Hapus</button>
                                     </form>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-text">Nama</div>
-                                    <input type="text" class="form-control" name="save_name" aria-describedby="helpId" placeholder="">
+                                    <input type="text" class="form-control" name="save_name" aria-describedby="helpId" placeholder="" value="<?= OlderValues::get("save_name") ?>">
                                 </div>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-text">Email</div>
-                                    <input type="text" class="form-control" name="save_email" aria-describedby="helpId" placeholder="">
+                                    <input type="text" class="form-control" name="save_email" aria-describedby="helpId" placeholder="" value="<?= OlderValues::get("save_email") ?>">
                                 </div>
                             </div>
                         </div>
@@ -108,18 +108,19 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-text">Pin</div>
-                                    <input type="text" class="form-control" name="save_pin" aria-describedby="helpId" placeholder="">
+                                    <input type="text" class="form-control" name="save_pin" aria-describedby="helpId" placeholder="" value="<?= OlderValues::get("save_pin") ?>">
                                 </div>
                             </div>
                         </div>
                         <div class="col-10 offset-1">
                         <div class="form-group">
                                 <div class="input-group">
+                                    <?php $save_role = OlderValues::get("save_role"); ?>
                                     <div class="input-group-text">Role</div>
                                     <select name="save_role" class="form-control">
                                         <option value="">Pilih role</option>
-                                        <option value="Admin">Admin</option>
-                                        <option value="User">Karyawan</option>
+                                        <option value="Admin" <?= $save_role == "Admin" ? 'selected' : '' ?>>Admin</option>
+                                        <option value="User" <?= $save_role == "User" ? 'selected' : '' ?>>Karyawan</option>
                                     </select>
                                 </div>
                             </div>
@@ -133,6 +134,12 @@
         </div>
     </div>
 </div>
+
+<?php if (OlderValues::get("modal") == "Add") : ?>
+    <script>
+        $("#karyawanAddModal").modal("show");
+    </script>
+<?php endif; ?>
 
 <!-- Modal Edit -->
 <div class="modal fade" id="karyawanEditModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">

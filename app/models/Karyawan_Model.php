@@ -40,8 +40,9 @@ class Karyawan_Model {
         $this->db->bind('name', $data['name']);
         $this->db->bind('pin', md5($data['pin']));
         $this->db->bind('role', $data['role']);
+        $this->db->execute();
 
-        return $this->db->execute() ? true : false;
+        return $this->db->rowCount();
     }
 
     public function destroy($id)
@@ -50,12 +51,13 @@ class Karyawan_Model {
         
         $this->db->query($query);
         $this->db->bind('id', $id);
+        $this->db->execute();
 
-        return $this->db->execute() ? true : false;
+        return $this->db->rowCount();
     }
 
 
-    public function updateData($data)
+    public function update($data)
     {
         $query = "UPDATE mahasiswa SET
                     nama = :nama,

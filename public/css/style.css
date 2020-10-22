@@ -38,7 +38,7 @@ body.login .left-container {
     position: fixed;
     top: -20%;
     left: 50%;
-    transform: translate(-50%, 20%);
+    transform: translate(-50%, -20%);
     width: 500px !important;
     animation-name: notification;
     animation-duration: 6s;

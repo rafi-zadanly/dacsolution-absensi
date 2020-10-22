@@ -12,7 +12,7 @@ class Flasher {
     public static function flash()
     {
         if( isset($_SESSION['flash']) ) {
-            $flash = '<div class="notification bg-' . $_SESSION['flash']['type'] . ' text-light text-center p-3 rounded">';
+            $flash = '<div class="notification bg-' . $_SESSION['flash']['type'] . ' text-light text-center p-3 rounded shadow">';
             $flash .= $_SESSION['flash']['message'];
             $flash .= '</div>';
             echo $flash;

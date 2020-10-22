@@ -12,17 +12,18 @@
     <link rel="stylesheet" href="<?= BASEURL ?>/css/style.css">
 </head>
 <body class="login">
+    <?php Flasher::flash(); ?>
     <div class="row p-0">
         <div class="col-8 bg-dark left-container"></div>
         <div class="col-4 right-container bg-light">
             <div class="row">
                 <div class="col-8 offset-2">
                     <div class="mt-5 p-3"></div>
-                    <h1 class="mt-5 text-center">Login</h1>
+                    <h1 class="mt-5 text-center">Login </h1>
                     <form action="<?= BASEURL; ?>/auth/login" method="post">
                         <div class="form-group mt-5">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="">
+                            <input type="text" class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="" value="<?= OlderValues::get("email"); ?>" autofocus>
                         </div>
                         <div class="form-group mt-3">
                             <label for="pin">Pin</label>
