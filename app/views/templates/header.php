@@ -25,6 +25,10 @@
     <!-- DataTable -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
+
+    <!-- Loader (Wait Me) -->
+    <link href="<?= BASEURL ?>/loader/waitMe.min.css" rel="stylesheet">
+    <script src="<?= BASEURL ?>/loader/waitMe.min.js"></script>
 </head>
 
 <body id="page-top">

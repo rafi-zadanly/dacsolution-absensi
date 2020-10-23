@@ -45,6 +45,11 @@ body.login .left-container {
     z-index: 9999;
 }
 
+#page-top, #wrapper .sidebar {
+    transition: ease-in;
+    transition-duration: 0.2s;
+}
+
 .online-sign{
     font-size: 10px;
 }

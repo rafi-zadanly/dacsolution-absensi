@@ -31,7 +31,7 @@ class Karyawan_Model {
         return $this->db->single();
     }
 
-    public function store($data)
+    public function validateInput($data)
     {
         $pin_used = false;
         $email_used = false;
@@ -54,7 +54,14 @@ class Karyawan_Model {
 
         $ret["email_used"] = $email_used;
 
-        if ($pin_used == false && $email_used == false) {
+        return $ret;
+    }
+
+    public function store($data)
+    {
+        $ret = $this->validateInput($data);
+
+        if ($ret["pin_used"] == false && $ret["email_used"] == false) {
             $query = "INSERT INTO " . $this->table . " VALUES (NULL, :email, :name, :pin, :role)";
         
             $this->db->query($query);
@@ -62,6 +69,30 @@ class Karyawan_Model {
             $this->db->bind('name', $data['name']);
             $this->db->bind('pin', md5($data['pin']));
             $this->db->bind('role', $data['role']);
+            $this->db->execute();
+            $ret["row"] = $this->db->rowCount();
+        }
+
+        return $ret;
+    }
+
+    public function update($data)
+    {
+        $ret = $this->validateInput($data);
+        if ($ret["pin_used"] == false && $ret["email_used"] == false) {
+            $pin = $data['pin'] != "" ? ", pin = :pin" : "";
+            $query = "UPDATE " . $this->table . " SET full_name = :name, email = :email, role = :role" . $pin . " WHERE id = :id";
+            
+            $this->db->query($query);
+            $this->db->bind('email', $data['email']);
+            $this->db->bind('name', $data['name']);
+            $this->db->bind('role', $data['role']);
+            $this->db->bind('id', $data['id']);
+
+            if ($pin != "") {
+                $this->db->bind('pin', md5($data['pin']));
+            }
+
             $this->db->execute();
             $ret["row"] = $this->db->rowCount();
         }
@@ -79,29 +110,6 @@ class Karyawan_Model {
 
         return $this->db->rowCount();
     }
-
-
-    public function update($data)
-    {
-        $query = "UPDATE mahasiswa SET
-                    nama = :nama,
-                    nrp = :nrp,
-                    email = :email,
-                    jurusan = :jurusan
-                WHERE id = :id";
-        
-        $this->db->query($query);
-        $this->db->bind('nama', $data['nama']);
-        $this->db->bind('nrp', $data['nrp']);
-        $this->db->bind('email', $data['email']);
-        $this->db->bind('jurusan', $data['jurusan']);
-        $this->db->bind('id', $data['id']);
-
-        $this->db->execute();
-
-        return $this->db->rowCount();
-    }
-
 
     public function searchData()
     {

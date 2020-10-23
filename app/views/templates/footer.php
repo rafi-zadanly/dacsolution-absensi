@@ -49,6 +49,31 @@
     <!-- Custom scripts for all pages-->
     <script src="<?= BASEURL ?>/js/sb-admin-2.min.js"></script>
 
+    <script>
+    // Source : https://www.jqueryscript.net/loading/jQuery-Plugin-For-Creating-Loading-Overlay-with-CSS3-Animations-waitMe.html
+    // none, bounce, rotateplane, stretch, orbit,
+    // roundBounce, win8, win8_linear or ios
+    $('body').waitMe({
+        effect:'win8_linear',
+        text:'Mohon tunggu...',
+        bg:'rgba(255,255,255,0.5)',
+        color:'#000',
+        maxSize:'',
+        waitTime: -1,
+        source:'',
+        textPos:'vertical',
+        fontSize:'',
+        onClose: function() {
+            $(this).fadeOut();
+        }
+    });
+
+    $(function(){
+        $(".waitMe").fadeOut(200);
+    });
+    </script>
+
+
 </body>
 
 </html>
