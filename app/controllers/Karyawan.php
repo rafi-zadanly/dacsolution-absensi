@@ -17,6 +17,16 @@ class Karyawan extends Controller {
         $this->view('templates/footer');
     }
 
+    public function edit()
+    {
+        $data['page'] = 'Karyawan';
+        $data['nested_page'] = '';
+        $data['karyawan'] = $this->model('Karyawan_Model')->getAll();
+        $this->view('templates/header', $data);
+        $this->view('admin/karyawan/edit', $data);
+        $this->view('templates/footer');
+    }
+
     public function store()
     {
         $name = $_POST["save_name"];

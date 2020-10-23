@@ -16,8 +16,6 @@
                         <th>Kota</th>
                         <th>Lokasi Barang</th>
                         <th>Kondisi Barang</th>
-                        <th>Keterangan</th>
-                        <th>Foto</th>
                         <th>Action</th>
                     </tr>
                 </thead>                
@@ -31,8 +29,6 @@
                         <td>Depok</td>
                         <td>Ruang meeting</td>
                         <td>Tidak rusak</td>
-                        <td>-</td>
-                        <td>-</td>
                         <td>
                         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target=""> 
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
@@ -51,8 +47,6 @@
                         <td>Depok</td>
                         <td>Ruang meeting</td>
                         <td>Tidak rusak</td>
-                        <td>-</td>
-                        <td>-</td>
                         <td>
                         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target=""> 
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
