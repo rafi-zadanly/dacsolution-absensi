@@ -14,8 +14,8 @@
                             <option value="">Inventory</option>
                         </select>
                     <center>
-                        <button type="submit" class="btn btn-primary mt-4">Cetak Laporan PDF</button>
-                        <button type="submit" class="btn btn-primary mt-4">Cetak Laporan XLS</button>
+                        <button type="submit" class="btn btn-primary mt-4">PDF</button>
+                        <button type="submit" class="btn btn-primary mt-4">XLS</button>
                     </center>
                 </form>
             </div>
@@ -47,8 +47,8 @@
                             <option value="">Cuti</option>
                         </select>
                     <center>
-                        <button type="submit" class="btn btn-primary mt-4">Cetak Laporan XLS</button>
-                        <button type="submit" class="btn btn-primary mt-4">Cetak Laporan XLS</button>
+                        <button type="submit" class="btn btn-primary mt-4">PDF</button>
+                        <button type="submit" class="btn btn-primary mt-4">XLS</button>
                     </center>
                 </form>
             </div>
