@@ -1,4 +1,5 @@
 <?php 
+use Dompdf\Dompdf;
 
 class Laporan extends Controller {
     // public function __construct()
@@ -14,5 +15,17 @@ class Laporan extends Controller {
         $this->view('templates/header', $data);
         $this->view('admin/laporan/index', $data);
         $this->view('templates/footer');
+    }
+
+    public function tanpa_tanggal()
+    {
+        $file = $_GET["file"];
+        $data = $_GET["data"];
+
+        if ($file == "PDF") {
+            # code...
+        }elseif ($file == "XLS") {
+            # code...
+        }
     }
 }

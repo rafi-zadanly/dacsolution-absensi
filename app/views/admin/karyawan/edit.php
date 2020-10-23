@@ -6,7 +6,7 @@
     </ol>
 </nav>
 
-<!-- Form i -->
+<!-- Form input -->
 <div class="row">
     <div class="col-6 offset-3">
         <div class="card shadow mb-4 mt-4">

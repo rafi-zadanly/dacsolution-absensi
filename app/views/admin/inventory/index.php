@@ -3,6 +3,12 @@
 <!-- Table -->
 <div class="card shadow mb-4 mt-5">
 
+    <div class="card-header py-3">
+        <a href="/inventory/tambah" class="btn">
+            <h5 class="m-0 font-weight-bold text-primary"><i class="fas fa-plus mr-2"></i>Tambah</h5>            
+        </a>
+    </div>
+
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered text-center datatable" width="100%" cellspacing="0">
