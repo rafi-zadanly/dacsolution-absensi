@@ -36,9 +36,9 @@
                         <td><?= $d["email"] ?></td>
                         <td><?= $d["role"] ?></td>
                         <td>
-                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#karyawanEditModal<?= $i ?>"> 
+                            <a href="/karyawan/edit" class="btn btn-primary btn-sm"> 
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                            </button>
+                            </a>
                             <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#karyawanDeleteModal<?= $i ?>">
                                 <i class="fas fa-trash" aria-hidden="true"></i>
                             </button>
@@ -50,7 +50,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Hapus data karyawan "<?= $d["full_name"] ?>" ?</h5>
+                                    <h5 class="modal-title">Hapus data karyawan [<small><?= $d["full_name"] ?></small>] ?</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>

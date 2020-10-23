@@ -29,10 +29,7 @@
                         <th>Nama Lengkap</th>
                         <th>Jam Datang</th>
                         <th>Jam Pulang</th>
-                        <th>Gambar Datang</th>
-                        <th>Gambar Pulang</th>
-                        <th>Tugas Luar</th>
-                        <th>Keterangan</th>                        
+                        <th>Tugas Luar</th>                      
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -43,9 +40,6 @@
                         <td>Fatimah Rizkyana Nuraini</td>
                         <td>08:20:21</td>
                         <td>17:25:40</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                         <td></td>
                         <td>
                             <i class="fa fa-circle text-danger" style="font-size: 20px;"></i>
@@ -65,9 +59,6 @@
                         <td>08:21:21</td>
                         <td>-</td>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                         <td>
                             <i class="fa fa-circle text-success" style="font-size: 20px;"></i>
                         </td>
@@ -86,9 +77,6 @@
                         <td>08:26:23</td>
                         <td>-</td>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                         <td>
                             <i class="fa fa-circle text-success" style="font-size: 20px;"></i>
                         </td>
@@ -106,9 +94,6 @@
                         <td>Asya Rasyanti</td>
                         <td>08:10:19</td>
                         <td>-</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                         <td></td>
                         <td>
                             <i class="fa fa-circle text-success" style="font-size: 20px;"></i>
