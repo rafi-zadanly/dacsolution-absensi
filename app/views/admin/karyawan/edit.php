@@ -13,7 +13,7 @@
     $role = $data["karyawan"]["role"];
 ?>
 
-<!-- Form i -->
+<!-- Form input -->
 <div class="row">
     <div class="col-6 offset-3">
         <form action="<?= BASEURL ?>/karyawan/update/<?= $id ?>" method="post">
