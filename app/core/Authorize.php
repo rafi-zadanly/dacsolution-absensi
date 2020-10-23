@@ -6,8 +6,7 @@ class Authorize {
     {
         if ($_SESSION["auth"] == NULL) {
             Flasher::setFlash("Login terlebih dahulu sebelum melanjutkan.", "danger");
-            header('Location: ' . BASEURL . '/login');
-            exit;
+            Redirect::to("/login");
         }
     }
 
@@ -15,8 +14,7 @@ class Authorize {
     {
         if ($_SESSION["auth"]["role"] != "Admin") {
             Flasher::setFlash("Mohon maaf anda bukan Admin.", "danger");
-            header('Location: ' . BASEURL . '/login');
-            exit;
+            Redirect::to("/login");
         }
     }
 
@@ -29,8 +27,7 @@ class Authorize {
     {
         if ($_SESSION["auth"]["role"] != "User") {
             Flasher::setFlash("Mohon maaf anda bukan Karyawan.", "danger");
-            header('Location: ' . BASEURL . '/login');
-            exit;
+            Redirect::to("/login");
         }
     }
 

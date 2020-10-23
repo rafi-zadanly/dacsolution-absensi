@@ -36,7 +36,7 @@ class Karyawan extends Controller {
             $this->view('admin/karyawan/edit', $data);
             $this->view('templates/footer');
         }else{
-            header('Location: ' . BASEURL . '/karyawan');
+            Redirect::to("/karyawan");
         }
     }
 
@@ -60,8 +60,7 @@ class Karyawan extends Controller {
                 if ($status_post["pin_used"] == false && $status_post["email_used"] == false) {
                     if ($status_post["row"] > 0) {
                         Flasher::setFlash("Berhasil menambahkan data karyawan.", "success");
-                        header('Location: ' . BASEURL . '/karyawan');
-                        exit;
+                        Redirect::to("/karyawan");
                     }else{
                         Flasher::setFlash("Gagal menambahkan data karyawan.", "danger");
                     }
@@ -79,7 +78,7 @@ class Karyawan extends Controller {
             }
         }
 
-        header('Location: ' . BASEURL . '/karyawan/add');
+        Redirect::to("/karyawan/add");
     }
 
     private function older_values($data)
@@ -115,10 +114,9 @@ class Karyawan extends Controller {
                 if ($status_post["pin_used"] == false && $status_post["email_used"] == false) {
                     if ($status_post["row"] > 0) {
                         Flasher::setFlash("Berhasil mengubah data karyawan.", "success");
-                        header('Location: ' . BASEURL . '/karyawan');
-                        exit;
+                        Redirect::to("/karyawan");
                     }else{
-                        Flasher::setFlash("Gagal menambahkan data karyawan.", "danger");
+                        Flasher::setFlash("Gagal mengubah data karyawan.", "danger");
                     }
                 }else{
                     $this->older_values($req_data);
@@ -135,8 +133,7 @@ class Karyawan extends Controller {
             }
         }
         
-        
-        header('Location: ' . BASEURL . '/karyawan/edit/' . $id);
+        Redirect::to("/karyawan/edit/" . $id);
     }
 
     public function destroy(){
@@ -150,7 +147,7 @@ class Karyawan extends Controller {
             }
         }
 
-        header('Location: ' . BASEURL . '/karyawan');
+        Redirect::to("/karyawan");
     }
 }
 
