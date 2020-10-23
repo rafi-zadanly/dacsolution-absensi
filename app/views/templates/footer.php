@@ -53,8 +53,9 @@
     // Source : https://www.jqueryscript.net/loading/jQuery-Plugin-For-Creating-Loading-Overlay-with-CSS3-Animations-waitMe.html
     // none, bounce, rotateplane, stretch, orbit,
     // roundBounce, win8, win8_linear or ios
+
     $('body').waitMe({
-        effect:'ios',
+        effect:'win8',
         text:'Mohon tunggu...',
         bg:'rgba(255,255,255,0.5)',
         color:'#000',
@@ -67,10 +68,14 @@
             $(this).fadeOut();
         }
     });
-
+    
     $(function(){
         $(".waitMe").fadeOut(200);
     });
+
+    $(window).on("beforeunload", function(e) {
+        $(".waitMe").show();
+    })
     </script>
 
 

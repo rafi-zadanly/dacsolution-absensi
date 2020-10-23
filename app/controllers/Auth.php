@@ -15,12 +15,12 @@ class Auth extends Controller {
             $_SESSION["auth"]["role"] = $auth_data["role"];
             Flasher::setFlash('Berhasil login sebagai ' . $auth_data["full_name"], 'success');
 
-            header('Location: ' . BASEURL . '/dashboard');
+            Redirect::to("/dashboard");
         }else{
             OlderValues::set("email", $req_data["email"]);
             OlderValues::set("pin", $req_data["pin"]);
             Flasher::setFlash('Username atau Password yang anda masukan salah.', 'danger');
-            header('Location: ' . BASEURL . '/login');
+            Redirect::to("/login");
         }
     }
 
@@ -28,6 +28,7 @@ class Auth extends Controller {
     {
         Flasher::setFlash('Berhasil Logout.', 'success');
         header('Location: ' . BASEURL . '/login');
+        session_destroy();
         unset($_SESSION["auth"]);
     }
 }
