@@ -37,6 +37,7 @@
                 </center>
 
                 <div class="row">
+                    <div class="col-12 text-center h5 secondary-font" id="time">Loading time...</div>
                     <div class="col-8 offset-2">
                         <div class="form-check mt-2">
                             <label class="form-check-label secondary-font">
@@ -51,6 +52,8 @@
             </div>
         </div>
     </div>
+
+    <canvas id="myCanvas"></canvas>
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -60,6 +63,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            setInterval(() => {
+                $.get("home/time_now", function (response, status) {
+                    $("#time").html(response);
+                })
+            }, 1000);
+
             $("#tujuan").hide();
             $("#pin").focus();
             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
@@ -76,23 +85,6 @@
                 alert("Izinkan menggunakan webcam untuk melakukan absensi.")
             }
 
-            function takeSnapshot() {
-                var img = document.createElement('img');
-                var context;
-
-                var width = video.offsetWidth, height = video.offsetHeight;
-
-                canvas = document.createElement('canvas');
-                canvas.width = width;
-                canvas.height = height;
-
-                context = canvas.getContext('2d');
-                context.drawImage(video, 0, 0, width, height);
-
-                img.src = canvas.toDataURL('image/png');
-                document.body.appendChild(img);
-            }
-
             $("#tugas-luar").change(function () { 
                 if (this.checked == true) {
                     $("#tujuan").slideDown(150);
@@ -102,6 +94,56 @@
                     $("#pin").focus()
                 }
             });
+
+            $("#pin").keyup(function (e) { 
+                if ($("#pin").val().length == 6) {
+                    var data = {pin: $(this).val()}
+                    $.post("auth/pin", data, function(response, status) {
+                        if (response == "true") {
+                            alert("berhasil");
+                        }else{
+                            alert("gagal");
+                        }
+                    })
+                }
+            });
+
+            var canvas, ctx, webcam;
+
+            function init() {
+                webcam = document.getElementById("video-webcam");
+                canvas = document.getElementById("myCanvas");
+                canvas.height = webcam.videoHeight;
+                canvas.width = webcam.videoWidth;
+                ctx = canvas.getContext('2d');
+            }
+
+            function snapshot() {
+                var h = canvas.height;
+                var w = canvas.width;
+
+                var hn = 600;
+                var wn = (w * hn) / h;
+
+                canvas.height = hn;
+                canvas.width = wn;
+
+                ctx.drawImage(webcam, 0, 0, wn, hn);
+
+                var text = $("#jam").html();
+
+                var cw, ch;
+                cw = wn;
+                ch = hn;
+
+                ctx.font = "28px verdana";
+                var textWidth = ctx.measureText(text).width;
+                ctx.globalAlpha = .50;
+                ctx.fillStyle = 'white'
+                ctx.fillText(text, cw - textWidth - 10, ch - 20);
+                ctx.fillStyle = 'black'
+                ctx.fillText(text, cw - textWidth - 10 + 2, ch - 20 + 2);
+            }
         });
     </script>
 </body>

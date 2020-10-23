@@ -113,3 +113,7 @@
     </div>
 
 </div>
+
+<script>
+    $(".datatable").DataTable();
+</script>

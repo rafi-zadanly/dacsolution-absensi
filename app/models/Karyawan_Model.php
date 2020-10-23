@@ -18,6 +18,16 @@ class Karyawan_Model {
         return $this->db->single();
     }
 
+    public function auth_pin($pin)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE pin=:pin');
+        $this->db->bind('pin', md5($pin));
+        $ret["data"] = $this->db->single();
+        $ret["isValid"] = $this->db->rowCount();
+
+        return $ret;
+    }
+
     public function getAll()
     {
         $this->db->query('SELECT * FROM ' . $this->table);

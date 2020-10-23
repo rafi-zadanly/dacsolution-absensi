@@ -24,6 +24,21 @@ class Auth extends Controller {
         }
     }
 
+    public function pin()
+    {
+        if (RequestMethod::is("POST")) {
+            $pin = $_POST["pin"];
+            $auth = $this->model("Karyawan_Model")->auth_pin($pin);
+            if ($auth["isValid"]) {
+                echo "true";
+            }else{
+                echo "false";
+            }
+        }else{
+            Redirect::to("/");
+        }
+    }
+
     public function logout()
     {
         Flasher::setFlash('Berhasil Logout.', 'success');

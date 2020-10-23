@@ -54,7 +54,7 @@ class Karyawan extends Controller {
                 "role" => $role,
             ];
 
-            if (($name && $email && $pin && $role) != "") {
+            if (($name && $email && $pin && $role) != "" && strlen($pin) == 6) {
                 $status_post = $this->model('Karyawan_Model')->store($req_data);
                 
                 if ($status_post["pin_used"] == false && $status_post["email_used"] == false) {
@@ -74,7 +74,8 @@ class Karyawan extends Controller {
                 }
             }else{
                 $this->older_values($req_data);
-                Flasher::setFlash("Isikan form dengan benar.", "danger");
+                $pinMsg = strlen($pin) != 6 ? "dan pin harus 6 angka" : "";
+                Flasher::setFlash("Isian form tidak valid $pinMsg.", "danger");
             }
         }
 
@@ -109,27 +110,31 @@ class Karyawan extends Controller {
             $update["pin"] = $pin != "" ? true : false;
 
             if (($name && $email && $role) != "") {
-                $status_post = $this->model('Karyawan_Model')->update($req_data, $update);
-                
-                if ($status_post["pin_used"] == false && $status_post["email_used"] == false) {
-                    if ($status_post["row"] > 0) {
-                        Flasher::setFlash("Berhasil mengubah data karyawan.", "success");
-                        Redirect::to("/karyawan");
-                    }else{
-                        Flasher::setFlash("Gagal mengubah data karyawan.", "danger");
-                    }
-                }else{
+                if ($update["pin"] && strlen($pin) != 6) {
                     $this->older_values($req_data);
-                    if ($status_post["email_used"]) {
-                        Flasher::setFlash("Email tersebut sudah digunakan.", "danger");
-                    }else if($status_post["pin_used"]){
-                        Flasher::setFlash("Pin tersebut sudah digunakan.", "danger");
+                    Flasher::setFlash("Pin harus 6 angka.", "danger");
+                }else{
+                    $status_post = $this->model('Karyawan_Model')->update($req_data, $update);
+                    
+                    if ($status_post["pin_used"] == false && $status_post["email_used"] == false) {
+                        if ($status_post["row"] > 0) {
+                            Flasher::setFlash("Berhasil mengubah data karyawan.", "success");
+                            Redirect::to("/karyawan");
+                        }else{
+                            Flasher::setFlash("Gagal mengubah data karyawan.", "danger");
+                        }
+                    }else{
+                        $this->older_values($req_data);
+                        if ($status_post["email_used"]) {
+                            Flasher::setFlash("Email tersebut sudah digunakan.", "danger");
+                        }else if($status_post["pin_used"]){
+                            Flasher::setFlash("Pin tersebut sudah digunakan.", "danger");
+                        }
                     }
                 }
-                
             }else{
                 $this->older_values($req_data);
-                Flasher::setFlash("Isikan form dengan benar.", "danger");
+                Flasher::setFlash("Isian form tidak valid.", "danger");
             }
         }
         

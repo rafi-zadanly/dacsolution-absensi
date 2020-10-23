@@ -57,8 +57,8 @@
     $('body').waitMe({
         effect:'win8',
         text:'Mohon tunggu...',
-        bg:'rgba(255,255,255,0.5)',
-        color:'#000',
+        bg:'rgba(0,0,0,0.5)',
+        color:'#fff',
         maxSize:'',
         waitTime: -1,
         source:'',
