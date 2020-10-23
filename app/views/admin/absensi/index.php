@@ -45,9 +45,9 @@
                             <i class="fa fa-circle text-danger" style="font-size: 20px;"></i>
                         </td>
                         <td>
-                            <button class="btn btn-primary btn-sm"> 
+                            <a href="/absensi/edit" class="btn btn-primary btn-sm"> 
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                            </button>
+                            </a>
                             <button class="btn btn-success btn-sm"> 
                                 <i class="fas fa-search-plus" aria-hidden="true"></i>
                             </button>
