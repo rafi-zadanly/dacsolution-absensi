@@ -31,7 +31,7 @@ class Karyawan_Model {
         return $this->db->single();
     }
 
-    public function validateInput($data)
+    public function store($data)
     {
         $pin_used = false;
         $email_used = false;
@@ -43,8 +43,6 @@ class Karyawan_Model {
         $this->db->resultSet();
         $pin_used = $this->db->rowCount() > 0 ? true : false;
 
-        $ret["pin_used"] = $pin_used;
-
         $query = 'SELECT * FROM ' . $this->table . ' WHERE email=:email';
 
         $this->db->query($query);
@@ -52,14 +50,8 @@ class Karyawan_Model {
         $this->db->resultSet();
         $email_used = $this->db->rowCount() > 0 ? true : false;
 
+        $ret["pin_used"] = $pin_used;
         $ret["email_used"] = $email_used;
-
-        return $ret;
-    }
-
-    public function store($data)
-    {
-        $ret = $this->validateInput($data);
 
         if ($ret["pin_used"] == false && $ret["email_used"] == false) {
             $query = "INSERT INTO " . $this->table . " VALUES (NULL, :email, :name, :pin, :role)";
@@ -76,11 +68,32 @@ class Karyawan_Model {
         return $ret;
     }
 
-    public function update($data)
+    public function update($data, $update)
     {
-        $ret = $this->validateInput($data);
+        $pin_used = false;
+        $email_used = false;
+
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE pin=:pin';
+
+        $this->db->query($query);
+        $this->db->bind('pin', md5($data['pin']));
+        $this->db->resultSet();
+        $pin_used = $this->db->rowCount() > 0 ? true : false;
+
+        if ($update["email"]) {
+            $query = 'SELECT * FROM ' . $this->table . ' WHERE email=:email';
+
+            $this->db->query($query);
+            $this->db->bind('email', $data['email']);
+            $this->db->resultSet();
+            $email_used = $this->db->rowCount() > 0 ? true : false;
+        }
+
+        $ret["pin_used"] = $pin_used;
+        $ret["email_used"] = $email_used;
+        
         if ($ret["pin_used"] == false && $ret["email_used"] == false) {
-            $pin = $data['pin'] != "" ? ", pin = :pin" : "";
+            $pin = $update["pin"] ? ", pin = :pin" : "";
             $query = "UPDATE " . $this->table . " SET full_name = :name, email = :email, role = :role" . $pin . " WHERE id = :id";
             
             $this->db->query($query);
@@ -89,7 +102,7 @@ class Karyawan_Model {
             $this->db->bind('role', $data['role']);
             $this->db->bind('id', $data['id']);
 
-            if ($pin != "") {
+            if ($update["pin"]) {
                 $this->db->bind('pin', md5($data['pin']));
             }
 

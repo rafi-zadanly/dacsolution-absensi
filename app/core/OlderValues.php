@@ -9,7 +9,7 @@ class OlderValues {
     public static function get($key)
     {
         if( isset($_SESSION['old'][$key]) ) {
-            $data =  $_SESSION['old'][$key];
+            $data = $_SESSION['old'][$key];
             unset($_SESSION['old'][$key]);
             return $data;
         }

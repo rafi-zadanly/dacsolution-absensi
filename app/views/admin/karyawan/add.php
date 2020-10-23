@@ -1,43 +1,28 @@
-<?php 
-    $id = $data["karyawan"]["id"];
-    $name = $data["karyawan"]["full_name"];
-    $email = $data["karyawan"]["email"];
-    $role = $data["karyawan"]["role"];
-    $old_name = OlderValues::get("name");
-    $old_email = OlderValues::get("email");
-    $old_pin = OlderValues::get("pin");
-    $old_role = OlderValues::get("role");
-
-    $role = $old_role != NULL ? $old_role : $role;
-?>
-
-<!-- Form input -->
 <div class="row">
     <div class="col-6 offset-3">
-        <form action="<?= BASEURL ?>/karyawan/update/<?= $id ?>" method="post">
+        <form action="<?= BASEURL ?>/karyawan/store" method="post">
             <div class="card shadow mb-4 mt-4">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-light shadow-sm">
                         <li class="breadcrumb-item"><a href="<?= BASEURL ?>/karyawan">Karyawan</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit (<?= $name ?>)</li>
+                        <li class="breadcrumb-item active" aria-current="page">Add</li>
                     </ol>
                 </nav>
                 <div class="card-body pt-2"> 
                     <div class="">
                         <span>Nama Lengkap :</span>
-                        <input type="text" name="name" class="form-control mt-2" value="<?= $old_name != NULL ? $old_name : $name ?>" autofocus>
+                        <input type="text" name="name" class="form-control mt-2" value="<?= OlderValues::get("name") ?>" autofocus>
                     </div>
                     <div class="mt-3">
                         <span>Email :</span>
-                        <input type="text" name="email" class="form-control mt-2" value="<?= $old_email != NULL ? $old_email : $email ?>">
-                        <input type="hidden" name="old_email" value="<?= $email ?>">
+                        <input type="text" name="email" class="form-control mt-2" value="<?= OlderValues::get("email") ?>">
                     </div>
                     <div class="mt-3">
                         <span>Pin :</span>
-                        <input type="text" name="pin" class="form-control mt-2" value="<?= $old_pin ?>">
-                        <small>*Kosongkan bila tidak ingin mengubah pin</small>
+                        <input type="text" name="pin" class="form-control mt-2" value="<?= OlderValues::get("pin") ?>">
                     </div>
                     <div class="mt-3">
+                        <?php $role = OlderValues::get("role"); ?>
                         <span>Role :</span>
                         <select name="role" class="form-control mt-2">
                             <option value="">Pilih role</option>

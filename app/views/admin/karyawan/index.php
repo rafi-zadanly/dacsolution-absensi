@@ -9,7 +9,7 @@
 <div class="card shadow mb-4 mt-5">
 
     <div class="card-header py-3">
-        <a href="#" class="btn" data-toggle="modal" data-target="#karyawanAddModal">
+        <a href="<?= BASEURL ?>/karyawan/add" class="btn">
             <h5 class="m-0 font-weight-bold text-primary"><i class="fas fa-plus mr-2"></i>Tambah</h5>            
         </a>
     </div>
@@ -58,7 +58,7 @@
                                 <div class="modal-footer">
                                     <form action="<?= BASEURL ?>/karyawan/destroy" method="post">
                                         <input type="hidden" name="id_delete" value="<?= $d["id"] ?>">
-                                        <button type="submit" class="btn btn-primary">Hapus</button>
+                                        <button type="submit" class="btn btn-danger">Hapus</button>
                                     </form>
                                 </div>
                             </div>
@@ -73,72 +73,6 @@
         </div>
     </div>
 </div>
-
-<!-- Modal Tambah -->
-<div class="modal fade" id="karyawanAddModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <form action="<?= BASEURL ?>/karyawan/store" method="post">
-                <div class="modal-header">
-                    <h5 class="modal-title">Tambah Karyawan</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body pt-3 pb-2">
-                    <div class="row">
-                        <div class="col-10 offset-1">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-text">Nama</div>
-                                    <input type="text" class="form-control" name="save_name" aria-describedby="helpId" placeholder="" value="<?= OlderValues::get("save_name") ?>">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-10 offset-1">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-text">Email</div>
-                                    <input type="text" class="form-control" name="save_email" aria-describedby="helpId" placeholder="" value="<?= OlderValues::get("save_email") ?>">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-10 offset-1">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-text">Pin</div>
-                                    <input type="text" class="form-control" name="save_pin" aria-describedby="helpId" placeholder="" value="<?= OlderValues::get("save_pin") ?>">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-10 offset-1">
-                        <div class="form-group">
-                                <div class="input-group">
-                                    <?php $save_role = OlderValues::get("save_role"); ?>
-                                    <div class="input-group-text">Role</div>
-                                    <select name="save_role" class="form-control">
-                                        <option value="">Pilih role</option>
-                                        <option value="Admin" <?= $save_role == "Admin" ? 'selected' : '' ?>>Admin</option>
-                                        <option value="User" <?= $save_role == "User" ? 'selected' : '' ?>>Karyawan</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="save-button">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<?php if (OlderValues::get("modal") == "Add") : ?>
-    <script>
-        $("#karyawanAddModal").modal("show");
-    </script>
-<?php endif; ?>
 
 <script type="text/javascript">
     $('.datatable').DataTable();
