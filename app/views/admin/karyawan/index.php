@@ -36,7 +36,7 @@
                         <td><?= $d["email"] ?></td>
                         <td><?= $d["role"] ?></td>
                         <td>
-                            <a href="/karyawan/edit" class="btn btn-primary btn-sm"> 
+                            <a href="/karyawan/edit/<?= $d["id"] ?>" class="btn btn-primary btn-sm"> 
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </a>
                             <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#karyawanDeleteModal<?= $i ?>">
@@ -61,66 +61,6 @@
                                         <button type="submit" class="btn btn-primary">Hapus</button>
                                     </form>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Modal Edit -->
-                    <div class="modal fade" id="karyawanEditModal<?= $i ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <form action="<?= BASEURL ?>/karyawan/store" method="post">
-                                    <input type="hidden" name="id_edit" value="<?= $d["id"] ?>">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Edit Karyawan [<small><?= $d["full_name"] ?></small>]</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body pt-3 pb-2">
-                                        <div class="row">
-                                            <div class="col-10 offset-1">
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <div class="input-group-text">Nama</div>
-                                                        <input type="text" class="form-control" name="edit_name" aria-describedby="helpId" placeholder="" value="<?= $d["full_name"] ?>">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-10 offset-1">
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <div class="input-group-text">Email</div>
-                                                        <input type="text" class="form-control" name="edit_email" aria-describedby="helpId" placeholder="" value="<?= $d["email"] ?>">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-10 offset-1">
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <div class="input-group-text">Pin</div>
-                                                        <input type="text" class="form-control" name="edit_pin" aria-describedby="helpId" placeholder="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-10 offset-1">
-                                            <div class="form-group">
-                                                    <div class="input-group">
-                                                        <div class="input-group-text">Role</div>
-                                                        <select name="edit_role" class="form-control">
-                                                            <option value="">Pilih role</option>
-                                                            <option value="Admin" <?= $d["role"] == "Admin" ? "selected" : "" ?>>Admin</option>
-                                                            <option value="User" <?= $d["role"] == "User" ? "selected" : "" ?>>Karyawan</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">Save</button>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                     </div>

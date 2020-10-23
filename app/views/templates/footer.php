@@ -54,7 +54,7 @@
     // none, bounce, rotateplane, stretch, orbit,
     // roundBounce, win8, win8_linear or ios
     $('body').waitMe({
-        effect:'win8_linear',
+        effect:'ios',
         text:'Mohon tunggu...',
         bg:'rgba(255,255,255,0.5)',
         color:'#000',
