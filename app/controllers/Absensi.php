@@ -29,13 +29,13 @@ class Absensi extends Controller {
         $this->view('admin/absensi/index', $data);
         $this->view('templates/footer');
     }
-
+// 
     public function create_all()
     {
         Authorize::checkAdmin();
 
         $data = $this->model("Absensi_Model")->create_all();
-        if ($data['row'] == 0) {
+        if ($data['row'] > 0) {
             Flasher::setFlash("Berhasil membuatkan absensi untuk hari ini.", "success");
         }else{
             Flasher::setFlash("Absensi untuk hari ini sudah ada.", "danger");
