@@ -31,9 +31,14 @@ class Karyawan extends Controller {
             $data['page'] = 'Karyawan';
             $data['nested_page'] = '';
             $data['karyawan'] = $this->model('Karyawan_Model')->getById($id);
-            $this->view('templates/header', $data);
-            $this->view('admin/karyawan/edit', $data);
-            $this->view('templates/footer');
+            if ($data['karyawan'] != NULL) {
+                $this->view('templates/header', $data);
+                $this->view('admin/karyawan/edit', $data);
+                $this->view('templates/footer');
+            }else{
+                Flasher::setFlash("Tidak ada data karyawan dengan nomor ID ($id)", "danger");
+                Redirect::to("/karyawan");
+            }
         }else{
             Redirect::to("/karyawan");
         }

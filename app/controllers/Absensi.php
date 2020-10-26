@@ -43,12 +43,23 @@ class Absensi extends Controller {
         Redirect::to('/absensi');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $data['page'] = 'Absensi';
-        $data['nested_page'] = '';
-        $this->view('templates/header', $data);
-        $this->view('admin/absensi/edit', $data);
-        $this->view('templates/footer');
+        if ($id != NULL) {
+            $data['page'] = 'Absensi';
+            $data['nested_page'] = '';
+            $data['absensi'] = $this->model('Absensi_Model')->getById($id);
+            if ($data['absensi'] != NULL) {
+                $this->view('templates/header', $data);
+                $this->view('admin/absensi/edit', $data);
+                $this->view('templates/footer');
+            }else{
+                Flasher::setFlash("Tidak ada data absensi dengan nomor ID ($id)", "danger");
+                Redirect::to("/absensi");
+            }
+        }else{
+            Redirect::to("/karyawan");
+        }
+        
     }
 }
