@@ -170,49 +170,18 @@ class Absensi_Model {
         return $ret;
     }
 
-    public function update($data, $update)
+    public function update($data)
     {
-        $pin_used = false;
-        $email_used = false;
-
-        $query = 'SELECT * FROM ' . $this->table . ' WHERE pin=:pin';
-
-        $this->db->query($query);
-        $this->db->bind('pin', md5($data['pin']));
-        $this->db->resultSet();
-        $pin_used = $this->db->rowCount() > 0 ? true : false;
-
-        if ($update["email"]) {
-            $query = 'SELECT * FROM ' . $this->table . ' WHERE email=:email';
-
-            $this->db->query($query);
-            $this->db->bind('email', $data['email']);
-            $this->db->resultSet();
-            $email_used = $this->db->rowCount() > 0 ? true : false;
-        }
-
-        $ret["pin_used"] = $pin_used;
-        $ret["email_used"] = $email_used;
+        $this->db->query('UPDATE ' . $this->table . ' SET attend_time=:attend_time, leave_time=:leave_time, outside_job=:outside_job, information=:information WHERE id=:id');
+        $this->db->bind('id', $data['id']);
+        $this->db->bind('attend_time', $data['attend_time']);
+        $this->db->bind('leave_time', $data['leave_time']);
+        $this->db->bind('outside_job', $data['outside_job']);
+        $this->db->bind('information', $data['information']);
+        $this->db->execute();
+        $row = $this->db->rowCount();
         
-        if ($ret["pin_used"] == false && $ret["email_used"] == false) {
-            $pin = $update["pin"] ? ", pin = :pin" : "";
-            $query = "UPDATE " . $this->table . " SET full_name = :name, email = :email, role = :role" . $pin . " WHERE id = :id";
-            
-            $this->db->query($query);
-            $this->db->bind('email', $data['email']);
-            $this->db->bind('name', $data['name']);
-            $this->db->bind('role', $data['role']);
-            $this->db->bind('id', $data['id']);
-
-            if ($update["pin"]) {
-                $this->db->bind('pin', md5($data['pin']));
-            }
-
-            $this->db->execute();
-            $ret["row"] = $this->db->rowCount();
-        }
-
-        return $ret;
+        return $row;
     }
 
     public function destroy($id)

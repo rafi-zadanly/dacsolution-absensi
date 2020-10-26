@@ -43,7 +43,7 @@ class Absensi extends Controller {
         Redirect::to('/absensi');
     }
 
-    public function edit($id)
+    public function edit($id = NULL)
     {
         if ($id != NULL) {
             $data['page'] = 'Absensi';
@@ -58,9 +58,43 @@ class Absensi extends Controller {
                 Redirect::to("/absensi");
             }
         }else{
-            Redirect::to("/karyawan");
+            Redirect::to("/absensi");
         }
-        
+    }
+
+    public function update($id = NULL)
+    {
+        if ($id !=  NULL && RequestMethod::is('POST')) {
+            $attend_time = $_POST['attend_time'];
+            $leave_time = $_POST['leave_time'];
+            $outside_job = $_POST['outside_job'];
+            $information = $_POST['tujuan'];
+            $attend_time = $attend_time != "" ? $attend_time : NULL;
+            $leave_time = $leave_time != "" ? $leave_time : NULL;
+            $outside_job = $outside_job == "true" ? true : false;
+            if ($outside_job) {
+                $information = $information != "" ? $information : NULL;
+            }else{
+                $information = NULL;
+            }
+            $req_data = [
+                "id" => $id,
+                "attend_time" => $attend_time,
+                "leave_time" => $leave_time,
+                "outside_job" => $outside_job,
+                "information" => $information,
+            ];
+
+            $row = $this->model('Absensi_Model')->update($req_data);
+            if ($row > 0) {
+                Flasher::setFlash("Berhasil mengubah data absensi.", "success");
+                Redirect::to('/absensi/detail/' . $id);
+            }else{
+                Flasher::setFlash("Gagal mengubah data absensi.", "danger");
+            }
+        }
+
+        Redirect::to("/absensi/edit/" . $id);
     }
 
     public function detail()
