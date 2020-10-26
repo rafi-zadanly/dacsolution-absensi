@@ -3,7 +3,6 @@
 class Karyawan extends Controller {
     public function __construct()
     {
-        Authorize::check();
         Authorize::checkAdmin();
     }
 
@@ -17,7 +16,7 @@ class Karyawan extends Controller {
         $this->view('templates/footer');
     }
 
-    public function add()
+    public function create()
     {
         $data['page'] = 'Karyawan';
         $data['nested_page'] = '';
