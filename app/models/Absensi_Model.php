@@ -120,16 +120,6 @@ class Absensi_Model {
         return $ret;
     }
 
-    public function auth_pin($pin)
-    {
-        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE pin=:pin');
-        $this->db->bind('pin', md5($pin));
-        $ret["data"] = $this->db->single();
-        $ret["row_data"] = $this->db->rowCount();
-
-        return $ret;
-    }
-
     public function getAll()
     {
         $this->db->query('SELECT * FROM ' . $this->table);
@@ -138,7 +128,7 @@ class Absensi_Model {
 
     public function getById($id)
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id=:id');
+        $this->db->query('SELECT absensi.*, karyawan.full_name FROM absensi, karyawan WHERE absensi.karyawan_id = karyawan.id AND absensi.id = :id');
         $this->db->bind('id', $id);
         return $this->db->single();
     }
