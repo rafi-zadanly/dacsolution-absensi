@@ -73,7 +73,7 @@ $outside_job = $outside_job != NULL ? $outside_job : "";
 </div>
 
 <script>
-    var currentOutsideJob = <?= $outside_job ?>;
+    var currentOutsideJob = "<?= $outside_job ?>";
     if (currentOutsideJob == "0") {
         $('textarea[name=tujuan]').attr('readonly', 'on');
     }
