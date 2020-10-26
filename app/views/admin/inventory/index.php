@@ -44,7 +44,7 @@
                             <a href="/inventory/detail" class="btn btn-success btn-sm"> 
                                 <i class="fas fa-search-plus" aria-hidden="true"></i>
                             </a>
-                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="">
+                            <button class="btn btn-danger btn-sm">
                                 <i class="fas fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
@@ -65,7 +65,7 @@
                             <a href="/inventory/detail" class="btn btn-success btn-sm"> 
                                 <i class="fas fa-search-plus" aria-hidden="true"></i>
                             </a>
-                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="">
+                            <button class="btn btn-danger btn-sm">
                                 <i class="fas fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>

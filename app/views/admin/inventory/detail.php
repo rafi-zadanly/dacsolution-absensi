@@ -4,7 +4,7 @@
     <div class="card-header py-0">
         <nav aria-label="breadcrumb" class="pt-3">
             <ol class="breadcrumb bg-light">
-                <li class="breadcrumb-item"><a href="<?= BASEURL ?>/absensi">Absensi</a></li>
+                <li class="breadcrumb-item"><a href="<?= BASEURL ?>/inventory">Inventory</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Detail</li>
             </ol>
         </nav>
@@ -17,31 +17,39 @@
         <div class="table-responsive">
             <table class="table table-bordered text-center datatable" width="100%" cellspacing="0">                
                 <tr>
-                    <td><b>Nama</b></td>
-                    <td>Fatimah Rizkyana Nuraini</td>                                            
+                    <td><b>Tanggal Pembelian</b></td>
+                    <td>21/10/2020</td>                                            
                 </tr>
                 <tr>
-                    <td><b>Tanggal</b></td>
-                    <td>26/10/2020</td>                     
+                    <td><b>Kode Barang</b></td>
+                    <td>A001</td>                     
                 </tr>
                 <tr>
-                    <td><b>Jam Datang</b></td>
-                    <td>08:10</td>
+                    <td><b>Nama Barang</b></td>
+                    <td>Meja</td>
                 </tr>
                 <tr>
-                    <td><b>Jam Pulang</b></td>
-                    <td>17:28</td>
+                    <td><b>Stok Barang</b></td>
+                    <td>17</td>
                 </tr>
                 <tr>
-                    <td><b>Status</b></td>
+                    <td><b>Kota</b></td>
+                    <td>Depok</td>
+                </tr>
+                <tr>
+                    <td><b>Lokasi Barang</b></td>
+                    <td>Ruang meeting</td>
+                </tr>
+                <tr>
+                    <td><b>Kondisi Barang</b></td>
+                    <td>Tidak Rusak</td>
+                </tr>
+                <tr>
+                    <td><b>Keterangan</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td><b>Gambar Datang</b></td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><b>Gambar Pulang</b></td>
+                    <td><b>Gambar Barang</b></td>
                     <td>-</td>
                 </tr>
             </table>

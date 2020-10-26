@@ -33,4 +33,13 @@ class Inventory extends Controller {
         $this->view('admin/inventory/edit', $data);
         $this->view('templates/footer');
     }
+
+    public function detail()
+    {
+        $data['page'] = 'Inventory';
+        $data['nested_page'] = '';        
+        $this->view('templates/header', $data);
+        $this->view('admin/inventory/detail', $data);
+        $this->view('templates/footer');
+    }
 }

@@ -51,4 +51,13 @@ class Absensi extends Controller {
         $this->view('admin/absensi/edit', $data);
         $this->view('templates/footer');
     }
+
+    public function detail()
+    {
+        $data['page'] = 'Absensi';
+        $data['nested_page'] = '';
+        $this->view('templates/header', $data);
+        $this->view('admin/absensi/detail', $data);
+        $this->view('templates/footer');
+    }
 }
