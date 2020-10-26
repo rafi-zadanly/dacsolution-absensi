@@ -10,6 +10,7 @@ class Dashboard extends Controller {
     {
         $data['page'] = 'Dashboard';
         $data['nested_page'] = '';
+        $data['dashboard'] = '';
         
         $this->view('templates/header', $data);
         if (Authorize::isAdmin()) {
