@@ -14,6 +14,23 @@ class Inventory_Model{
         $this->db->query('SELECT * FROM ' . $this->table);
         return $this->db->resultSet();
     }
+
+    public function getById($id) {
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id = :id');
+        $this->db->bind('id', $id);
+        return $this->db->single();
+    }
+
+    public function destroy($id)
+    {
+        $query = "DELETE FROM " . $this->table . " WHERE id = :id";
+        
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }
 
 ?>
