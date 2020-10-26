@@ -3,21 +3,29 @@
 <div class="card shadow mt-5">
 
     <div class="card-header py-3">
-        <div class="row">
-            <div class="col-3">
-                <label for="">Dari tanggal :</label>
-                <input type="date" name="" id="" class="form-control">
+        <form action="<?= BASEURL ?>/absensi/index" method="post">
+            <div class="row">
+                <div class="col-3">
+                    <label for="">Dari tanggal :</label>
+                    <input type="date" name="from" id="" class="form-control" value="<?= $data["from"] ?>">
+                </div>
+                <div class="col-3">
+                    <label for="">Sampai tanggal :</label>
+                    <input type="date" name="to" id="" class="form-control" value="<?= $data["to"] ?>">
+                </div>
+                <div class="col-6 pt-3 mt-3">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a href="<?= BASEURL ?>/absensi" class="btn btn-outline-secondary">
+                        <i class="fas fa-sync"></i>
+                    </a>
+                    <a href="<?= BASEURL ?>/absensi/create_all" class="btn btn-secondary">
+                        <i class="fas fa-plus"></i> Buat absensi hari ini
+                    </a>
+                </div>
             </div>
-            <div class="col-3">
-                <label for="">Sampai tanggal :</label>
-                <input type="date" name="" id="" class="form-control">                
-            </div>
-            <div class="col-3 pt-3 mt-3">
-                <button class="btn btn-primary">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </div>
+        </form>
     </div>
 
     <div class="card-body">
@@ -29,84 +37,38 @@
                         <th>Nama Lengkap</th>
                         <th>Jam Datang</th>
                         <th>Jam Pulang</th>
-                        <th>Tugas Luar</th>                      
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>                
                 <tbody>
+                    <?php 
+                        $i = 1;
+                        foreach ($data["absensi"]["data"] as $d) : 
+                        $attend_time = $d["attend_time"];
+                        $leave_time = $d["leave_time"];
+                    ?>
                     <tr>
-                        <td>1</td>
-                        <td>Fatimah Rizkyana Nuraini</td>
-                        <td>08:20:21</td>
-                        <td>17:25:40</td>
-                        <td></td>
+                        <td><?= $i ?></td>
+                        <td><?= $d["full_name"] ?></td>
+                        <td><?= $attend_time != NULL ? $attend_time : "-" ?></td>
+                        <td><?= $leave_time != NULL ? $leave_time : "-" ?></td>
                         <td>
-                            <i class="fa fa-circle text-danger" style="font-size: 20px;"></i>
+                            <i class="fa fa-circle <?= $attend_time != NULL && $leave_time == NULL ? "text-success" : "text-danger" ?>" style="font-size: 20px;"></i>
                         </td>
                         <td>
-                            <a href="/absensi/edit" class="btn btn-primary btn-sm"> 
+                            <a href="/absensi/edit/<?= $d["id"] ?>" class="btn btn-primary btn-sm"> 
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </a>
-                            <button class="btn btn-success btn-sm"> 
+                            <a href="/absensi/detail/<?= $d["id"] ?>" class="btn btn-success btn-sm"> 
                                 <i class="fas fa-search-plus" aria-hidden="true"></i>
-                            </button>
+                            </a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Rafi Zadanly</td>
-                        <td>08:21:21</td>
-                        <td>-</td>
-                        <td></td>
-                        <td>
-                            <i class="fa fa-circle text-success" style="font-size: 20px;"></i>
-                        </td>
-                        <td>
-                            <button class="btn btn-primary btn-sm"> 
-                                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                            </button>
-                            <button class="btn btn-success btn-sm"> 
-                                <i class="fas fa-search-plus" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Mikha T</td>
-                        <td>08:26:23</td>
-                        <td>-</td>
-                        <td></td>
-                        <td>
-                            <i class="fa fa-circle text-success" style="font-size: 20px;"></i>
-                        </td>
-                        <td>
-                            <button class="btn btn-primary btn-sm"> 
-                                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                            </button>
-                            <button class="btn btn-success btn-sm"> 
-                                <i class="fas fa-search-plus" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Asya Rasyanti</td>
-                        <td>08:10:19</td>
-                        <td>-</td>
-                        <td></td>
-                        <td>
-                            <i class="fa fa-circle text-success" style="font-size: 20px;"></i>
-                        </td>
-                        <td>
-                            <button class="btn btn-primary btn-sm"> 
-                                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                            </button>
-                            <button class="btn btn-success btn-sm"> 
-                                <i class="fas fa-search-plus" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    <?php 
+                        $i++;
+                        endforeach; 
+                    ?>
                 </tbody>
             </table>
         </div>

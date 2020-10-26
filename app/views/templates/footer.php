@@ -64,9 +64,7 @@
         source:'',
         textPos:'vertical',
         fontSize:'',
-        onClose: function() {
-            $(this).fadeOut();
-        }
+        onClose: function() {}
     });
     
     $(function(){

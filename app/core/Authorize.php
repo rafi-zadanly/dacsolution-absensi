@@ -10,8 +10,14 @@ class Authorize {
         }
     }
 
+    public static function isLogin()
+    {
+        return isset($_SESSION["auth"]) != NULL ? true : false;
+    }
+
     public static function checkAdmin()
     {
+        Authorize::check();
         if ($_SESSION["auth"]["role"] != "Admin") {
             Flasher::setFlash("Mohon maaf anda bukan Admin.", "danger");
             Redirect::to("/login");
@@ -25,6 +31,7 @@ class Authorize {
 
     public static function checkUser()
     {
+        Authorize::check();
         if ($_SESSION["auth"]["role"] != "User") {
             Flasher::setFlash("Mohon maaf anda bukan Karyawan.", "danger");
             Redirect::to("/login");
