@@ -1,18 +1,19 @@
 <?php 
 
 class Inventory extends Controller {
-    // public function __construct()
-    // {
-    //     Authorize::check();
-    //     Authorize::checkAdmin();
-    // }
+    public function __construct()
+    {
+        Authorize::check();
+        Authorize::checkAdmin();
+    }
 
     public function index()
     {
         $data['page'] = 'Inventory';
-        $data['nested_page'] = '';        
+        $data['nested_page'] = '';       
+        $data['inventory'] = $this->model('Inventory_Model')->getAll(); 
         $this->view('templates/header', $data);
-        $this->view('admin/inventory/index', $data);
+        $this->view('admin/inventory/index', $data);        
         $this->view('templates/footer');
     }
 
