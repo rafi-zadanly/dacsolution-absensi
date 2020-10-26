@@ -17,8 +17,8 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Tanggal Pembelian</th>
                         <th>Kode Barang</th>
+                        <th>Tanggal Pembelian</th>                        
                         <th>Nama Barang</th>
                         <th>Stok Barang</th>
                         <th>Kota</th>
@@ -35,8 +35,8 @@
             
                     <tr>
                         <td><?= $i ?></td>
-                        <td><?= $d["tanggal_pembelian"] ?></td>
-                        <td><?= $d["kode_barang"] ?></td>
+                        <td><?= $d["id"] ?></td>
+                        <td><?= $d["tanggal_pembelian"] ?></td>                        
                         <td><?= $d["nama_barang"] ?></td>
                         <td><?= $d["stok_barang"] ?></td>
                         <td><?= $d["kota"] ?></td>
@@ -46,14 +46,35 @@
                             <a href="/inventory/edit" class="btn btn-primary btn-sm"> 
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </a>
-                            <a href="/inventory/detail" class="btn btn-success btn-sm"> 
+                            <a href="/inventory/detail/<?= $d["id"] ?>" class="btn btn-success btn-sm"> 
                                 <i class="fas fa-search-plus" aria-hidden="true"></i>
                             </a>
-                            <button class="btn btn-danger btn-sm">
+                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#inventoryDeleteModal<?= $i ?>">
                                 <i class="fas fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
                     </tr>
+
+                    <!-- Modal Hapus -->
+                    <div class="modal fade" id="inventoryDeleteModal<?= $i ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Hapus data inventory [<small><?= $d["nama_barang"] ?></small>] ?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="<?= BASEURL ?>/inventory/destroy" method="post">
+                                        <input type="hidden" name="id_delete" value="<?= $d["id"] ?>">
+                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <?php 
                         $i++;
                         endforeach;

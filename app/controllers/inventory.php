@@ -35,12 +35,27 @@ class Inventory extends Controller {
         $this->view('templates/footer');
     }
 
-    public function detail()
+    public function detail($id)
     {
         $data['page'] = 'Inventory';
-        $data['nested_page'] = '';        
+        $data['nested_page'] = '';     
+        $data['inventory'] = $this->model('Inventory_Model')->getById($id);
         $this->view('templates/header', $data);
         $this->view('admin/inventory/detail', $data);
         $this->view('templates/footer');
+    }
+
+    public function destroy(){
+        if (RequestMethod::is('POST')) {
+            $id = $_POST["id_delete"];
+            $status_delete = $this->model('Inventory_Model')->destroy($id);
+            if ($status_delete > 0) {
+                Flasher::setFlash("Berhasil menghapus data inventory.", "success");
+            }else{
+                Flasher::setFlash("Gagal menghapus data inventory.", "danger");
+            }
+        }
+
+        Redirect::to("/inventory");
     }
 }
