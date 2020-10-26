@@ -28,15 +28,20 @@
                     </tr>
                 </thead>                
                 <tbody>
+                    <?php 
+                        $i = 1;
+                        foreach ($data["inventory"] as $d) :
+                    ?>
+            
                     <tr>
-                        <td>1</td>
-                        <td>21/10/2020</td>
-                        <td>A001</td>
-                        <td>Meja</td>
-                        <td>15</td>
-                        <td>Depok</td>
-                        <td>Ruang meeting</td>
-                        <td>Tidak rusak</td>
+                        <td><?= $i ?></td>
+                        <td><?= $d["tanggal_pembelian"] ?></td>
+                        <td><?= $d["kode_barang"] ?></td>
+                        <td><?= $d["nama_barang"] ?></td>
+                        <td><?= $d["stok_barang"] ?></td>
+                        <td><?= $d["kota"] ?></td>
+                        <td><?= $d["lokasi_barang"] ?></td>
+                        <td><?= $d["kondisi_barang"] ?></td>
                         <td>
                             <a href="/inventory/edit" class="btn btn-primary btn-sm"> 
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
@@ -49,27 +54,10 @@
                             </button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>21/10/2020</td>
-                        <td>A002</td>
-                        <td>Kursi</td>
-                        <td>15</td>
-                        <td>Depok</td>
-                        <td>Ruang meeting</td>
-                        <td>Tidak rusak</td>
-                        <td>
-                            <a href="/inventory/edit" class="btn btn-primary btn-sm"> 
-                                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                            </a>
-                            <a href="/inventory/detail" class="btn btn-success btn-sm"> 
-                                <i class="fas fa-search-plus" aria-hidden="true"></i>
-                            </a>
-                            <button class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    <?php 
+                        $i++;
+                        endforeach;
+                    ?>
                 </tbody>
             </table>
         </div>

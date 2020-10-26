@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="card-footer text-right">
-                    <a href="<?= BASEURL ?>/karyawan" class="btn btn-secondary">Kembali</a>
+                    <a href="<?= BASEURL ?>/karyawan" class="btn btn-secondary">Batal</a>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </div>

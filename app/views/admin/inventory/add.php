@@ -52,7 +52,7 @@
 
                 <!-- Card footer -->
                 <div class="card-footer text-right">
-                    <a href="<?= BASEURL ?>/inventory" class="btn btn-secondary">Kembali</a>
+                    <a href="<?= BASEURL ?>/inventory" class="btn btn-secondary">Batal</a>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
