@@ -21,11 +21,11 @@
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-                <div class="col-4 pt-3 mt-3">
-                    <a href="<?= BASEURL ?>/absensi/create_all" class="btn btn-primary">
+                <div class="col-4 pt-3 mt-3 text-right">
+                    <a href="<?= BASEURL ?>/absensi/create_all" class="btn btn-outline-primary">
                         <i class="fas fa-plus mr-2"></i>Siapkan absensi hari ini
                     </a>
-                    <a href="<?= BASEURL ?>/absensi/index/refresh" class="btn btn-outline-primary ml-3">
+                    <a href="<?= BASEURL ?>/absensi/index/refresh" class="btn btn-primary ml-3">
                         <i class="fas fa-sync"></i>
                     </a>
                 </div>
@@ -61,7 +61,11 @@
                         <td><?= $attend_time != NULL ? $attend_time : "-" ?></td>
                         <td><?= $leave_time != NULL ? $leave_time : "-" ?></td>
                         <td>
+                        <?php if ($attend_time == NULL && $leave_time == NULL) : ?>
+                            <i class="fa fa-circle text-danger" style="font-size: 20px;"></i>
+                        <?php else : ?>
                             <i class="fa fa-circle <?= $attend_time != NULL && $leave_time == NULL ? "text-danger" : "text-success" ?>" style="font-size: 20px;"></i>
+                        <?php endif; ?>
                         </td>
                         <td>
                             <a href="/absensi/edit/<?= $d["id"] ?>" class="btn btn-primary btn-sm"> 
