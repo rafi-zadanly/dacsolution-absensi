@@ -4,9 +4,9 @@ class Penggajian extends Controller {
     public function index()
     {
         $data['page'] = 'Penggajian';
-        $data['nested_page'] = '';
+        $data['nested_page'] = 'Gaji';
         $this->view('templates/header', $data);
         $this->view('admin/penggajian/index', $data);
         $this->view('templates/footer');
     }
-}
+} 

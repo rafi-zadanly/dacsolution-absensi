@@ -17,7 +17,7 @@
 
                 <!-- Table -->
                 <div class="table-responsive">
-                    <table class="table table-bordered text-left" width="100%" cellspacing="0">
+                    <table class="table table-bordered text-left" cellspacing="0">
                         <tr>
                             <td><b>Kode Barang</b></td>
                             <td><?= $data["inventory"]["id"] ?></td>                     
@@ -52,7 +52,7 @@
                         </tr>
                         <tr>
                             <td><b>Gambar Barang</b></td>
-                            <td><?= $data["inventory"]["gambar_barang"] ?><td>
+                            <td><?= $data["inventory"]["gambar_barang"] ?></td>
                         </tr>
                     </table>
                     <a href="/inventory" class="btn btn-dark">Kembali</a>

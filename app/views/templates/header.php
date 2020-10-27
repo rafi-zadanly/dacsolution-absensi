@@ -79,10 +79,17 @@
 
             <!-- Nav Item - Penggajian -->
             <li class="nav-item <?= $data["page"] == "Penggajian" ? "active" : ""; ?>">
-                <a class="nav-link <?= $data["page"] == "Penggajian" ? "disabled" : ""; ?>" href="/penggajian">
-                    <i class="fas fa-dollar-sign"></i>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#penggajianPages" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-id-card-alt"></i>
                     <span>Penggajian</span>
                 </a>
+                <div id="penggajianPages" class="collapse <?= $data["page"] == "Penggajian" ? "show" : ""; ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Menu :</h6>
+                        <a class="collapse-item <?= $data["nested_page"] == "Gaji" ? "active" : ""; ?>" href="/penggajian/gaji">Gaji</a>
+                        <a class="collapse-item <?= $data["nested_page"] == "Tunjangan" ? "active" : ""; ?>" href="/penggajian/tunjangan">Tunjangan</a>                        
+                    </div>
+                </div>
             </li>
 
             <!-- Nav Item - Pages Cuti Menu -->
