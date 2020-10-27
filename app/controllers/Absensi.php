@@ -6,20 +6,30 @@ class Absensi extends Controller {
         Authorize::check();
     }
 
-    public function index($from = "", $to = "")
+    public function index($type = "")
     {
         $from = isset($_POST['from']) != NULL ? $_POST['from'] : "";
         $to = isset($_POST['to']) != NULL ? $_POST['to'] : "";
+        
+        if ($type != "refresh") {
+            $from = !empty(OlderValues::getWithoutUnset('absensi_date_from')) && $from == "" ? OlderValues::getWithoutUnset('absensi_date_from') : $from;
+            $to = !empty(OlderValues::getWithoutUnset('absensi_date_to')) && $to == "" ? OlderValues::getWithoutUnset('absensi_date_to') : $to;
+        }else{
+            OlderValues::set('absensi_date_from', "");
+            OlderValues::set('absensi_date_to', "");
+            Redirect::to('/absensi');
+        }
         
         if ($to == "") {
             $from = $from != "" ? $from : date("Y-m-d");
         }
 
+        OlderValues::set('absensi_date_from', $from);
+        OlderValues::set('absensi_date_to', $to);
+
         $data['page'] = 'Absensi';
         $data['nested_page'] = '';
         $data['absensi'] = $this->model("Absensi_Model")->filter($from, $to);
-        $data['from'] = $from;
-        $data['to'] = $to;
         
         if ($data["absensi"]["data_row"] == 0) {
             Flasher::setFlash("Data tidak ditemukan dari tanggal yang dicari.", "danger");
@@ -35,7 +45,7 @@ class Absensi extends Controller {
         Authorize::checkAdmin();
 
         $data = $this->model("Absensi_Model")->create_all();
-        if ($data['row'] > 0) {
+        if ($data == true) {
             Flasher::setFlash("Berhasil membuatkan absensi untuk hari ini.", "success");
         }else{
             Flasher::setFlash("Absensi untuk hari ini sudah ada.", "danger");
