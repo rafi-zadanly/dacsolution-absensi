@@ -79,15 +79,15 @@ class Absensi_Model {
     {
         $query = 'SELECT absensi.*, karyawan.email, karyawan.full_name FROM absensi, karyawan WHERE absensi.karyawan_id = karyawan.id AND ';
         if ($from != "" && $to == "") {
-            $query .= 'absensi.date >= :from';
+            $query .= 'absensi.date >= :from ORDER BY date DESC';
             $this->db->query($query);
             $this->db->bind('from', $from);
         } else if ($to != "" && $from == "") {
-            $query .= 'absensi.date <= :to';
+            $query .= 'absensi.date <= :to ORDER BY date DESC';
             $this->db->query($query);
             $this->db->bind('to', $to);
         } else {
-            $query .= 'absensi.date BETWEEN :from AND :to';
+            $query .= 'absensi.date BETWEEN :from AND :to ORDER BY date DESC';
             $this->db->query($query);
             $this->db->bind('from', $from);
             $this->db->bind('to', $to);
@@ -103,9 +103,10 @@ class Absensi_Model {
         $this->db->query('SELECT * FROM ' . $this->table . ' WHERE date=:date');
         $this->db->bind('date', $date);
         $this->db->execute();
-        $ret["row"] = $this->db->rowCount();
+        $row = $this->db->rowCount();
+        $status = false;
 
-        if ($ret["row"] == 0) {
+        if ($row == 0) {
             $this->db->query('SELECT * FROM karyawan');
             $result = $this->db->resultSet();
             $query = "";
@@ -114,10 +115,10 @@ class Absensi_Model {
             }
             $this->db->query($query);
             $this->db->execute();
-            $ret['row'] = $this->db->rowCount();
+            $status = true;
         }
 
-        return $ret;
+        return $status;
     }
 
     public function getAll()
@@ -202,6 +203,37 @@ class Absensi_Model {
         $this->db->query($query);
         $this->db->bind('keyword', "%$keyword%");
         return $this->db->resultSet();
+    }
+
+    public function migrate()
+    {
+        $this->db->query('SELECT * FROM old_absensi');
+        $old = $this->db->resultSet();
+        $query = "";
+        foreach ($old as $d) {
+            $attend_time_exp = explode(" ", $d['tanggal_datang']);
+            $leave_time = NULL;
+            if ($d['tanggal_pulang'] != ("" || NULL)) {
+                $leave_time = explode(" ", $d['tanggal_pulang']);
+            }
+            
+            $id = $d['idabsensi'];
+            $karyawan_id = $d['idkaryawan'];
+            $attend_time = $attend_time_exp[1];
+            $leave_time = $leave_time != NULL ? $leave_time[1] : NULL;
+            $date = $attend_time_exp[0];
+            $outside_job = $d['is_tugas_luar'];
+            $information = $d['keterangan'];
+            $query .= 'INSERT INTO 
+                    absensi (id, karyawan_id, date, attend_time, leave_time, outside_job, information) 
+                    VALUES ('. $id .', '. $karyawan_id .', "'. $date .'", "'. $attend_time .'", "'. $leave_time .'", "'. $outside_job .'", "'. $information .'");';
+        }
+        
+
+        $this->db->query($query);
+        $this->db->execute();
+        $row = $this->db->rowCount();
+        return $row > 0 ? true : false;
     }
 
 }

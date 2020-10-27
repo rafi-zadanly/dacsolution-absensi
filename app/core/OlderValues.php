@@ -14,4 +14,12 @@ class OlderValues {
             return $data;
         }
     }
+
+    public static function getWithoutUnset($key)
+    {
+        if( isset($_SESSION['old'][$key]) ) {
+            $data = $_SESSION['old'][$key];
+            return $data;
+        }
+    }
 }

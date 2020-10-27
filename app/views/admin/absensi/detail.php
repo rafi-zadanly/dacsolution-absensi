@@ -86,7 +86,7 @@ $information = $information != NULL ? $information : "-";
                             </td>
                         </tr>
                     </table>
-                    <a href="/absensi" class="btn btn-dark">Kembali</a>
+                    <a href="<?= BASEURL ?>/absensi" class="btn btn-dark">Kembali</a>
                 </div>
             </div>
 
